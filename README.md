@@ -12,9 +12,9 @@
 Uts PWEB/
 ├── index.php                      ← Entry point utama (orchestrator)
 │
-├── partials/
-│   ├── sections_part1.php         ← 🟣 Tom      — Navbar, Hero, Stats, Categories, Featured, POTW
-│   └── sections_part2.php         ← 🟣 Bagus    — Journal, Team, About / Footer
+├── main/
+│   ├── section1.php         ← 🟣 Tom      — Navbar, Hero, Stats, Categories, Featured, POTW
+│   └── section2.php         ← 🟣 Bagus    — Journal, Team, About / Footer
 │
 ├── auth/
 │   ├── signIn.php                 ← 🔵 Felysia  — Halaman Login
@@ -38,8 +38,8 @@ Uts PWEB/
 
 | Anggota | Bagian | File |
 |---------|--------|------|
-| **Tom** 🟣 | Landing Page — Hero s.d. Product of the Week | `partials/sections_part1.php` |
-| **Bagus** 🟣 | Landing Page — Journal, Team, Footer | `partials/sections_part2.php` |
+| **Tom** 🟣 | Landing Page — Hero s.d. Product of the Week | `main/section1.php` |
+| **Bagus** 🟣 | Landing Page — Journal, Team, Footer | `main/section2.php` |
 | **Felysia** 🔵 | Authentication — Login & Register | `auth/signIn.php`, `auth/signUp.php` |
 | **Jodi** 🟢 | Store — Shopping Cart & Checkout | `cart/shoppingCart.php`, `cart/checkOut.php` |
 
@@ -50,8 +50,8 @@ Uts PWEB/
 ```
 [Browser] → index.php
                 │
-                ├── require partials/sections_part1.php  (Tom — Navbar + Hero + Categories + Featured + POTW)
-                └── require partials/sections_part2.php  (Bagus — Journal + Team + Footer)
+                ├── require main/section1.php  (Tom — Navbar + Hero + Categories + Featured + POTW)
+                └── require partials/section2.php  (Bagus — Journal + Team + Footer)
 
 [Navbar Cart button] → cart/shoppingCart.php  (Jodi)
                                 │
@@ -64,7 +64,7 @@ Uts PWEB/
 ```
 
 **Key integration points:**
-- `index.php` meng-`define('VELORA_ENTRY', true)` → partial files hanya bisa diakses via include (tidak bisa diakses langsung)
+- `index.php` meng-`define('VELORA_ENTRY', true)` → main files hanya bisa diakses via include (tidak bisa diakses langsung)
 - `$_SESSION['cart_count']` di-set oleh `cart/shoppingCart.php` → dibaca oleh `index.php` untuk badge navbar
 - `$_SESSION['user_id']` & `$_SESSION['user_name']` di-set oleh `auth/signIn.php` → dibaca oleh `index.php` untuk tampilan navbar (Sign In / Sign Out)
 - Semua halaman menggunakan `assets/css/style.css` (VELORA design tokens) dan `assets/js/main.js` (theme toggle, navbar scroll, toast)
@@ -85,7 +85,7 @@ cp -r "Uts PWEB" C:/xampp/htdocs/velora
 # 2. Jalankan Apache dari XAMPP Control Panel
 
 # 3. Buka browser
-http://localhost/velora/index.php
+http://localhost/nama folder/index.php
 ```
 
 > **Catatan:** Tidak perlu database untuk demo ini. Semua data menggunakan dummy/session PHP.
@@ -125,7 +125,7 @@ Fonts: **DM Serif Display** (heading) + **DM Sans** (body) via Google Fonts.
 
 ## 📋 Detail per Bagian
 
-### 🟣 Tom — `partials/sections_part1.php`
+### 🟣 Tom — `main/section1.php`
 Bertanggung jawab atas semua section di bagian atas landing page:
 - **Navbar** — dengan cart badge, theme toggle, dan kondisi login/logout dari `$_SESSION`
 - **Hero Section** — headline animasi, search bar, CTA button
@@ -134,7 +134,7 @@ Bertanggung jawab atas semua section di bagian atas landing page:
 - **Featured Exhibit** — showcase produk/layanan unggulan
 - **Product of the Week** — limited edition highlight
 
-### 🟣 Bagus — `partials/sections_part2.php`
+### 🟣 Bagus — `main/section2.php`
 Bertanggung jawab atas section bawah landing page:
 - **Journal / Editorial** — 3 artikel dengan thumbnail dari Unsplash
 - **Team Section** — 4 kartu anggota tim dengan animasi glow + ring
@@ -170,13 +170,13 @@ index.php ── ?logout=1 ──► session_destroy() ──► redirect → in
 ## 🚀 Kolaborasi GitHub
 
 ```bash
-# Tom — push sections_part1.php
-git add partials/sections_part1.php
+# Tom — push section1.php
+git add main/section1.php
 git commit -m "feat(landing): hero, stats, categories, featured, POTW - Tom"
 git push
 
-# Bagus — push sections_part2.php
-git add partials/sections_part2.php
+# Bagus — push section2.php
+git add main/section2.php
 git commit -m "feat(landing): journal, team, footer - Bagus"
 git push
 
